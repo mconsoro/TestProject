@@ -34,6 +34,10 @@ REST_FRAMEWORK = {
     ]
 }
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.AllowAllUsersModelBackend'
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -140,13 +144,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-my_domain = 'miguelconsoro@gmail.com'
-my_domain = my_domain.encode('idna')
-
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST ='smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = my_domain
+EMAIL_HOST_USER = 'miguelconsoro@gmail.com'
 EMAIL_HOST_PASSWORD = 'Mc@29048600'
 

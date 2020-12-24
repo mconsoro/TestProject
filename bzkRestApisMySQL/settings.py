@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -28,8 +28,9 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
+    'DEFAULT_AUTHENTICATION_CLASSES': [        
         'rest_framework.authentication.BasicAuthentication',
+        'account.backend.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ]
 }
@@ -138,6 +139,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

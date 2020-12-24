@@ -1,10 +1,12 @@
 from rest_framework import serializers 
-from account.models import LoginInfo 
+from django.contrib.auth.models import User 
  
-class LoginInfoSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
  
     class Meta:
-        model = LoginInfo
-        fields = ('first_name',
+        model = User
+        fields = ('username',
+                  'first_name',
                   'last_name',
-                  'is_authenticated')
+                  'email',
+                  'is_active')

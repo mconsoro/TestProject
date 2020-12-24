@@ -1,9 +1,7 @@
-from django.conf.urls import url
+from django.urls import path
 from account import views
 
 urlpatterns = [ 
-    #url(r'^api/account$', views.register),
-    url(r'^api/account$', views.login),
-    #url(r'^api/account$', views.logout)
-    #url(r'^api/account$', views.sendMail)
+    #url(r'^api/account$', views.login),
+    path('api/account/', views.LoginView.as_view())
 ]

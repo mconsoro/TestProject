@@ -1,11 +1,11 @@
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, logout as do_logout
-from django.conf import settings
 
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import GenericAPIView
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.parsers import JSONParser
 
 from .send_mail_c import AppSenEmail
@@ -79,14 +79,14 @@ import jwt
 
 class LoginView(GenericAPIView):
    def post(self, request):
+    
        data = request.data 
        user_name = data.get('username')
        password = data.get('password')
        user = authenticate(username = user_name, password = password)
       
        if user:
-           print(settings.JWT_SECRET_KEY)
-           auth_token = jwt.encode({'username': user.username }, "")
+           auth_token = jwt.encode({'username': user.username }, 'mc29')
            
            serializer = UserSerializer(user)
            
@@ -95,3 +95,16 @@ class LoginView(GenericAPIView):
            return Response(data, status = status.HTTP_200_OK)
 
        return Response({'detail':'Ivalid credentials'}, status = status.HTTP_400_BAD_REQUEST)
+    
+
+class Admin(GenericAPIView):
+     permission_classes = (IsAuthenticated,)
+     def post(self, request):
+       
+       try:
+         return Response({'Restult: Ok'},status = status.HTTP_200_OK)
+       except:
+         return Response({'Restult: Error'},status = status.HTTP_400_BAD_REQUEST)
+
+
+

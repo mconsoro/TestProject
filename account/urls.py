@@ -1,7 +1,10 @@
 from django.urls import path
 from account import views
 
+
+
 urlpatterns = [ 
-    #url(r'^api/account$', views.login),
-    path('api/account/', views.LoginView.as_view())
+   
+    path('login/', views.LoginView.as_view(), name = 'login'),
+    path('admin/', views.Admin.as_view(), name ='admin')
 ]
